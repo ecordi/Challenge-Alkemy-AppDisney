@@ -15,19 +15,23 @@ film
 para ver la lista desordenada:
 
 ```
-http://localhost:8080/
+http://localhost:8080/films
 ```
 
-para ver la lista ordenada:
+para ver la lista ordenada de manera ascendente:
 
 ```
-http://localhost:8080/
+http://localhost:8080//fims?order=ASC 
 ```
+para ver la lista ordenada de manera ascendente:
 
+```
+http://localhost:8080//fims?order=DESC 
+```
 para ver un objeto en particular:
 
 ```
-http://localhost:8080/
+http://localhost:8080//movies?id={}
 ```
 
 ### API
