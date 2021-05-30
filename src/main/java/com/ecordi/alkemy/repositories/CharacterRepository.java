@@ -1,5 +1,8 @@
 package com.ecordi.alkemy.repositories;
 
-public class CharacterRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.ecordi.alkemy.entities.Character;
+
+public interface CharacterRepository extends JpaRepository<Character, Integer> {
 
 }
