@@ -70,7 +70,6 @@ public class Film implements Serializable {
 	private int creation_date;
 
 	@Column(name = "qualification")
-
 	@NotNull
 	@Min(1)
 	@Max(5)
