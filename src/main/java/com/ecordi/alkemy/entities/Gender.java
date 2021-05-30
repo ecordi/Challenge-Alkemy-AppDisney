@@ -34,14 +34,14 @@ public class Gender implements Serializable {
 	@Id
 	@SequenceGenerator(name = "gender_sequence", sequenceName = "gender_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gender_sequence")
-	
 	private Long id;
 
-	@Column
+	@Column(name = "name")
+	@NotEmpty
 	private String name;
 	
-	@Column
-	@NotEmpty
+	@Column(name = "image")
+	@Lob()
 	private String image;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gender", cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})

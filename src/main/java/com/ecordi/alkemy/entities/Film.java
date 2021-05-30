@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -57,21 +56,21 @@ public class Film implements Serializable {
 	private Integer id;
 
 	@Column(name = "image", nullable = true)
-	@Basic(optional = false, fetch = FetchType.EAGER)
 	@Lob()
 	private String image;
 
-	@Column
+	@Column(name = "title")
 	@NotEmpty
 	private String title;
 
 	@NotNull
 	@Min(1600)
 	@Max(2021)
-	@Column
+	@Column(name = "creation_date")
 	private int creation_date;
 
-	@Column
+	@Column(name = "qualification")
+
 	@NotNull
 	@Min(1)
 	@Max(5)
@@ -80,6 +79,6 @@ public class Film implements Serializable {
 	@ManyToMany(mappedBy = "associated_films")
 	private Set<Character> associated_characters = new HashSet<>();
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="genero_id")
+	@JoinColumn(name="gender_id")
 	private Gender gender;
 }

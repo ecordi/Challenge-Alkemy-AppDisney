@@ -28,7 +28,7 @@ import lombok.ToString;
 
 @Data
 @Entity
-@Table(name = "characters")
+@Table(name = "character")
 public class Character implements Serializable {
 
 	/**
@@ -63,7 +63,7 @@ public class Character implements Serializable {
 	private String story;
 
 	@ManyToMany
-	@JoinTable(name = "actuaciones", 
+	@JoinTable(name = "actuations", 
 	joinColumns = @JoinColumn(name = "idCharacter"), 
 	inverseJoinColumns = @JoinColumn(name = "idFilm"))
 	private Set<Film> associated_films = new HashSet<>();
