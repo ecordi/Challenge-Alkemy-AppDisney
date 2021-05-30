@@ -3,7 +3,7 @@
 
 Este es un sistema basico que cuenta con peliculas o series (Films), personajes y generos. Cada Film tiene un Genero, cada Genero puede tener varios Films, cada Film puede tener varios Characters y cada Character puede pertenecer a varios Films
 
-<img align="center" src="" />
+<img align="center" src="https://user-images.githubusercontent.com/36177129/120087813-9bcc2300-c0c1-11eb-937f-e69251bdedec.png" />
 
 ## Como funciona
 Hay dos formas de usar la aplicacion, para ver los datos, podemos verlos directamente por el navegador, y si ademas queremos hacer otras operaciones como alta, baja o modificacion, podemos usar la API.
