@@ -39,12 +39,12 @@ http://localhost:8080/fims?order=ASC
 para ver la lista ordenada de manera ascendente:
 
 ```
-http://localhost:8080//fims?order=DESC 
+http://localhost:8080/fims?order=DESC 
 ```
 para ver un objeto en particular:
 
 ```
-http://localhost:8080//movies?id={id}
+http://localhost:8080/movies?id={id}
 ```
 
 ### API
