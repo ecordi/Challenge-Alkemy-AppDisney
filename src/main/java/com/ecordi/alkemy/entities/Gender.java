@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +28,7 @@ import lombok.ToString;
 
 @Data
 @Entity
-@Table(name = "gender")
+@Table(name = "genders")
 public class Gender implements Serializable {
 
 	private static final long serialVersionUID = 1l;
@@ -35,15 +37,14 @@ public class Gender implements Serializable {
 	@SequenceGenerator(name = "gender_sequence", sequenceName = "gender_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gender_sequence")
 	private Long id;
-
-	@Column(name = "name")
-	@NotEmpty
-	private String name;
 	
+	@NotEmpty
+	@Column(name = "name")
+	private String name;
+	@JsonIgnoreProperties
 	@Column(name = "image")
-	@Lob()
 	private String image;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "gender", cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@JsonIgnoreProperties
+	@OneToMany
 	private Set<Film> associated_films = new HashSet<>();
 }

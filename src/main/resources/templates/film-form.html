@@ -1,0 +1,69 @@
+<div th:with="disableFields=!${editMode} and ${#authorization.expression('hasRole(''ROLE_USER'')')}">
+	<form class="form" role="form" autocomplete="off" th:object="${films}"
+	th:action="${editMode} ?@{/editUser} :@{/films}" method="post">
+	<!--Es necesario para poder pasar la validacion del Model-->
+	<input class="form-control" type=hidden th:field="${films.id}" th:if="${editMode}">
+	<div class="form-group row">
+		<label class="col-lg-3 col-form-label form-control-label">ID</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="text" th:field="${films.id}" th:disabled="${disableFields}" >
+			<div class="alert-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-lg-3 col-form-label form-control-label">Image</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="text" th:field="${films.image}"  th:disabled="${disableFields}" >
+			<div class="alert-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-lg-3 col-form-label form-control-label">title</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="email" th:field="${films.title}"  th:disabled="${disableFields}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-lg-3 col-form-label form-control-label">creation_date</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="text" th:field="${films.creation_date}"  th:disabled="${disableFields}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('creation_date')}" th:errors="*{creation_date}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-lg-3 col-form-label form-control-label">qualification</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="text" th:field="${films.qualification}"  th:disabled="${disableFields}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('qualification')}" th:errors="*{qualification}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label th:text="Roles" class="col-lg-3 col-form-label form-control-label"></label>
+		<div class="col-lg-9">
+			<select class="form-control" size="1" th:field="${films.associated_characters}" th:disabled="${disableFields}" >
+				<option th:each="ch :${associated_characters}" th:value="${ch.id}" th:text="${ch.name}">
+				</option>
+			</select>
+			<div class="alert-danger" th:if="${#fields.hasErrors('associated_characters')}" th:errors="*{associated_characters}">Name Error</div>
+		</div>
+	</div>
+	<div class="form-group row" th:if="${editMode==null or editMode==false}">
+		<label class="col-lg-3 col-form-label form-control-label">gender</label>
+		<div class="col-lg-9">
+			<input class="form-control" type="password" th:field="${films.gender.name}"  th:disabled="${disableFields}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('gender.name')}" th:errors="*{gender.name}">Name Error</div>
+		</div>
+	</div>
+	
+	<div class="form-group row">
+		<div class="col-lg-12 text-center">
+			<a class="btn btn-secondary"  th:href="@{'/userForm/cancel'}">Cancel</a>
+			<button type="button" class="btn btn-secondary" data-toggle="modal" th:if="${editMode}" data-target="#changePasswordModal">Change Password</button>
+        <input type="submit" class="btn btn-primary" value="Save Changes" th:value="${editMode} ?'Save User' :'Create User'">
+		</div>
+	</div>
+	<div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error MEssage</div>
+	<div class="alert alert-succes text-center d-none" id="formSuccess"th:if="${editMode}" >Succes Message</div>
+</form>
+</div>

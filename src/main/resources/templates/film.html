@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Disney</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a style="color: white" class="navbar-toggler"><span class="navbar-toggler-icon"></span>Home</a>
+		<a style="color: white" class="navbar-toggler">Alkemy Challenge Disney</a>
+		<div class="dropdown">
+			<a style="color: white" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cerrar Sesion</a>
+			<div class="dropdown-menu text-center">
+				<a> <img src="img/user.png" height="80" width="80"></a><br>
+				<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+					<!-- Logged in user: <span sec:authentication="${role}"></span>
+                Roles: <span sec:authentication="principal.authorities"></span>-->
+					<div>
+						<form class="btn btn-danger" action="#" th:action="@{/logout}" method="post">
+							<!-- <security:form-login default-target-url="/listar"/>-->
+							<input type="submit" value="Logout" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container mt-4">
+		<a th:href="@{/create}" class="btn btn-success">Nuevo</a>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Imagen</th>
+					<th>Título</th>
+					<th>Fecha de creación</th>
+					<th class="hidden-md-down">Calificación</th>
+					<th class="hidden-md-down">Personajes asociados</th>
+					<th class="hidden-md-down">Genero</th>
+					<th>ACCIONES</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="film:${films}">
+					<td th:text="${film.id}"></td>
+					<td th:text="${film.image}"></td>
+					<td th:text="${film.title}"></td>
+					<td th:text="${film.creation_Date}"></td>
+					<td th:text="${film.qualification}"></td>
+					<td>
+						<div class="form-group row">
+							<div class="col-lg-9">
+								<select select class="form-control" size="1" th:field="${characters}"
+									th:disabled="${disableFields}">
+									<option th:each="ch :${characters}" th:value="${ch.id}" th:text="${ch.name}">
+									</option>
+								</select>
+							</div>
+						</div>
+					</td>
+					<td>
+						<div class="form-group row">
+
+							<div class="col-lg-9">
+								<select class="form-control" size="1" th:field="${genders}"
+									th:disabled="${disableFields}">
+									<option th:each="x:${genders}" th:value="${x.id}" th:text="${x.name}">
+									</option>
+								</select>
+							</div>
+						</div>
+					</td>
+
+					<td>
+						<a th:href="@{/update}+${film.id}" class="btn btn-warning ">Editar</a>
+						<a th:onclick="eliminar([[${film.id}]])" class="btn btn-danger ">Eliminar</a>
+					</td>
+
+					< </tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="funciones.js"></script>
+</body>
+
+</html>

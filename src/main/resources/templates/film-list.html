@@ -1,0 +1,59 @@
+<div class="table-responsive">
+	<table id="userList" class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Imagen</th>
+				<th scope="col">Titulo</th>
+				<th scope="col">creation_date</th>
+				<th scope="col">creation_date</th>
+				<th scope="col">Genero</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="film: ${filmList}">
+				<td th:text="${film.id}"></td>
+				<td th:text="${film.image}"></td>
+				<td th:text="${film.title}"></td>
+				<td th:text="${film.creation_date}"></td>
+				<td th:text="${film.qualification}"></td>
+				<td>
+					<div class="form-group row">
+						<label th:text="Personajes" class="col-lg-3 col-form-label form-control-label"></label>
+						<div class="col-lg-9">
+							<select class="form-control" size="1" th:field="${characters}"
+								th:disabled="${disableFields}">
+								<option th:each="ch :${characters}" th:value="${ch.id}" th:text="${role.name}">
+								</option>
+							</select>
+							<div class="alert-danger" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Name Error</div>
+						</div>
+					</div>
+				</td>
+				<td th:text="${film.gender}">
+			</tr>
+				<td>
+					<span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or (${#authorization.expression('hasRole(''ROLE_USER'')')} and ${#httpServletRequest.remoteUser==user.username})">
+						<a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
+				</span>
+				<span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" >
+					 <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
+			 </span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="alert alert-danger text-center" th:if="${ListErrorMessage}" th:text="${ListErrorMessage}">Error Message
+	</div>
+</div>
+<script type="text/javascript">
+	function confirmDelete(id) {
+		$('#deleteModal').modal('show');
+		$("#userIdHiddenInput").val(id);
+	}
+	function deleteUser() {
+		var id = $("#userIdHiddenInput").val();
+		window.location = "deleteUser/" + id;
+	}
+</script>
