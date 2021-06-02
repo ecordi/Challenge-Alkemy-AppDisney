@@ -36,11 +36,11 @@ Requerimientos técnicos
     ○ Personajes asociados.
   ``` 
   ● Género: deberá tener
-  ``
+    ```
     ○ Nombre.
     ○ Imagen.
     ○ Películas o series asociadas.
- ```
+    ```
 2. Autenticación de Usuarios
   Para realizar peticiones a los endpoints subsiguientes el usuario deberá contar con un token que
   obtendrá al autenticarse. Para ello, deberán desarrollarse los endpoints de registro y login, que
@@ -91,11 +91,11 @@ Requerimientos técnicos
   Deberá permitir buscar por título, y filtrar por género. Además, permitir ordenar los resultados por
   fecha de creación de forma ascendiente o descendiente.
   El término de búsqueda, filtro u ordenación se deberán especificar como parámetros de query:
-   
+   ```
     ● /movies?name=nombre
     ● /movies?genre=idGenero
     ● /movies?order=ASC | DESC
-
+  ``` 
 11. Envío de emails
   Al registrarse en el sitio, el usuario deberá recibir un email de bienvenida. Es recomendable, la
   utilización de algún servicio de terceros como SendGrid.
