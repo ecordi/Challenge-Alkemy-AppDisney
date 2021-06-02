@@ -27,7 +27,7 @@ Requerimientos técnicos
     ○ Historia.
     ○ Películas o series asociadas.
 ```
-  ● Película o Serie: deberá tener,
+  ● Película o Serie: deberá tener
   ```
     ○ Imagen.
     ○ Título.
@@ -35,12 +35,12 @@ Requerimientos técnicos
     ○ Calificación (del 1 al 5).
     ○ Personajes asociados.
   ``` 
-  ● Género: deberá tener,
-    ```
+  ● Género: deberá tener
+  ``
     ○ Nombre.
     ○ Imagen.
     ○ Películas o series asociadas.
-    ```
+ ```
 2. Autenticación de Usuarios
   Para realizar peticiones a los endpoints subsiguientes el usuario deberá contar con un token que
   obtendrá al autenticarse. Para ello, deberán desarrollarse los endpoints de registro y login, que
