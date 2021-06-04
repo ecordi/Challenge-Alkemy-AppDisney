@@ -17,8 +17,8 @@
 			<div class="dropdown-menu text-center">
 				<a> <img src="img/user.png" height="80" width="80"></a><br>
 				<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
-					<!-- Logged in user: <span sec:authentication="${role}"></span>
-                Roles: <span sec:authentication="principal.authorities"></span>-->
+					<!-- Logged in user: <span sec:authentication="${role}"></span>-->
+                <!--Roles: <span sec:authentication="principal.authorities"></span>-->
 					<div>
 						<form class="btn btn-danger" action="#" th:action="@{/logout}" method="post">
 							<!-- <security:form-login default-target-url="/listar"/>-->
@@ -29,19 +29,18 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="container mt-4">
-		<a th:href="@{/create}" class="btn btn-success">Nuevo</a>
-		<table class="table">
+	<table class="table">
+    <a th:href="@{/createFilm}" class="btn btn-success">Nuevo</a>
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Imagen</th>
 					<th>Título</th>
 					<th>Fecha de creación</th>
-					<th class="hidden-md-down">Calificación</th>
-					<th class="hidden-md-down">Personajes asociados</th>
-					<th class="hidden-md-down">Genero</th>
+					<th>Calificación</th>
+					<th >Personajes asociados</th>
+					<th >Genero</th>
 					<th>ACCIONES</th>
 				</tr>
 			</thead>
@@ -51,7 +50,7 @@
 					<td th:text="${film.id}"></td>
 					<td th:text="${film.image}"></td>
 					<td th:text="${film.title}"></td>
-					<td th:text="${film.creation_Date}"></td>
+					<td th:text="${film.creation_date}"></td>
 					<td th:text="${film.qualification}"></td>
 					<td>
 						<div class="form-group row">
@@ -70,7 +69,7 @@
 							<div class="col-lg-9">
 								<select class="form-control" size="1" th:field="${genders}"
 									th:disabled="${disableFields}">
-									<option th:each="x:${genders}" th:value="${x.id}" th:text="${x.name}">
+									<option th:each=" x :${genders}" th:value="${x.id}" th:text="${x.name}">
 									</option>
 								</select>
 							</div>
@@ -82,7 +81,7 @@
 						<a th:onclick="eliminar([[${film.id}]])" class="btn btn-danger ">Eliminar</a>
 					</td>
 
-					< </tr>
+					 </tr>
 			</tbody>
 		</table>
 	</div>

@@ -2,12 +2,17 @@ package com.ecordi.alkemy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ecordi.alkemy.email.MailService;
 import com.ecordi.alkemy.entities.Film;
 import com.ecordi.alkemy.entities.User;
+import com.ecordi.alkemy.entities.DTO.FilmDTO;
 import com.ecordi.alkemy.repositories.RoleRepository;
 import com.ecordi.alkemy.serviceImplements.CharacterImplementation;
 import com.ecordi.alkemy.serviceImplements.FilmImplementation;
@@ -23,16 +28,19 @@ public class controllerbrowser {
 	private CharacterImplementation _characterImplementation;
 	@Autowired
 	private GenderImplementation _genderImplementation;
-	
+	@Autowired
+	private MailService mailService;
+
 	@Autowired
 	UserService userService;
 
 	@Autowired
 	RoleRepository roleRepository;
+
 	/**
 	 * Entering takes you to the login form then redirects to the messy film list
 	 */
-	@GetMapping({ "/", ""})
+	@GetMapping({ "/", "" })
 	public String index() {
 		return "redirect:/films";
 	}
@@ -41,24 +49,48 @@ public class controllerbrowser {
 	 * Generates a list of movies with all their attributes and the status of their
 	 * characters
 	 */
-	
-	
-	  @GetMapping("/films") public String gilm(Model model) {
-	  
-	  model.addAttribute("films", _filmImplementation.getFilms());
-	  model.addAttribute("characters", _characterImplementation.getAll());
-	  model.addAttribute("genders", _genderImplementation.getAll());
-
-	  return "film"; }
-	 
-	@GetMapping("/gender{id}")
-	public String gender(Model model, @RequestParam Long id) {
-
-		model.addAttribute("gender",_genderImplementation.getAll());
-		model.addAttribute("genders", _filmImplementation.getFilms());
-		
-
-		return "index2";
+	@GetMapping("/films")
+	public String gilm(Model model) {
+		model.addAttribute("films", _filmImplementation.getFilms());
+		model.addAttribute("characters", _characterImplementation.getAll());
+		model.addAttribute("genders", _genderImplementation.getAll());
+		model.addAttribute("userList", userService.getAllUsers());
+		model.addAttribute("roles", roleRepository.findAll());
+		return "film";
 	}
 
+	@GetMapping("/gender{id}")
+	public String gender(Model model, @RequestParam Long id) {
+		model.addAttribute("gender", _genderImplementation.getAll());
+		model.addAttribute("genders", _filmImplementation.getFilms());
+		return "";
+	}
+
+	@GetMapping("/createFilm")
+	public String agregar(Model model) {
+		model.addAttribute("film", new Film());
+
+		model.addAttribute("films", _filmImplementation.getFilms());
+
+		model.addAttribute("characters", _characterImplementation.getAll());
+		model.addAttribute("genders", _genderImplementation.getAll());
+		return "form-film";
+	}
+
+	@PostMapping("/saveFilm")
+	@Transactional
+	public String save(@Validated Film a, Model model) {
+		_filmImplementation.createFilm(a);
+		return "redirect:/films";
+	}
+
+	@PostMapping("/sendMail")
+	public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail,
+			@RequestParam("subject") String subject, @RequestParam("body") String body) {
+
+		String message = body + "\n\n Datos de contacto: " + "\nNombre: " + name + "\nE-mail: " + mail;
+		mailService.sendMail("nanotralvel@gmail.com", "nanotralvel@gmail.com", subject, message);
+
+		return "send_mail_view";
+	}
 }

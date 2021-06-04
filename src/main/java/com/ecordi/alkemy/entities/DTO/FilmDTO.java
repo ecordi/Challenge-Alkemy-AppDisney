@@ -21,9 +21,7 @@ import lombok.ToString;
 public class FilmDTO {
 	private Long id;
 	private String title;
-
 	private String image;
-
 	private Date creation_Date;
 	private int qualification;
 

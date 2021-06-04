@@ -1,28 +1,25 @@
 package com.ecordi.alkemy.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailAuthenticationException;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.ecordi.alkemy.entities.User;
-
 @Service
 public class MailService {
-	@Autowired
-	private JavaMailSender javaMailSender;
 
-	public void sendMail(String from, String to, String subject, String body) {
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-		SimpleMailMessage mail = new SimpleMailMessage();
+    public void sendMail(String from, String to, String subject, String body) {
 
-		mail.setFrom(from);
-		mail.setTo(to);
-		mail.setSubject(subject);
-		mail.setText(body);
+        SimpleMailMessage mail = new SimpleMailMessage();
 
-		javaMailSender.send(mail);
-	}
+        mail.setFrom(from);
+        mail.setTo(to);
+        mail.setSubject(subject);
+        mail.setText(body);
+
+        javaMailSender.send(mail);
+    }
 }
