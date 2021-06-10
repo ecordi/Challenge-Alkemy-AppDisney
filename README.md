@@ -97,7 +97,7 @@ JSON BODY:
 http://localhost:8080/api
 ```
 
-Bbuscar por nombre, y filtrar por edad, peso o películas/series en las que participó.
+Buscar por nombre, y filtrar por edad, peso o películas/series en las que participó.
 Para especificar el término de búsqueda o filtros se deberán enviar como parámetros de query:
 ● /characters?name=nombre
 ● /characters?age=edad
